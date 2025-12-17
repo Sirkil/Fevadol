@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fevadol Extra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. SETUP & RESET --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #333333; /* Dark background to match image context */
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* --- 2. MAIN CONTAINER --- */
+        .mobile-container {
+            width: 100%;
+            max-width: 500px; 
+            background: #ffffff; /* Light gray background from image */
+            min-height: 100vh;
+            position: relative;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- 3. HEADER --- */
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0 20px 0;
+        }
+
+        .logo-top {
+            width: 120px;
+            height: auto;
+        }
+
+        /* --- 4. MEDIA SECTIONS --- */
+        .banner-container {
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .banner-img {
+            width: 100%;
+            display: block;
+        }
+
+        .video-container {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- 5. DESCRIPTION SECTION (Footer Image) --- */
+        .footer-desc-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .footer-img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+        /* --- 6. CTA BUTTON --- */
+        .cta-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0 30px 0;
+        }
+
+        .buy-now-btn {
+            width: 220px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .buy-now-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- 7. MODAL (Pop-up) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-box {
+            background: #fff;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            padding: 40px 20px 30px 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .buy-label-top {
+            background-color: #2d7a4d;
+            color: white;
+            padding: 8px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .store-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .store-option:hover {
+            opacity: 0.8;
+        }
+
+        .store-logo {
+            width: 100%;
+            max-width: 80px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container">
+        
+        <header class="header">
+            <img src="spemaco logo.png" alt="Spimaco" class="logo-top">
+        </header>
+
+        <div class="banner-container">
+            <img src="fevadol banner.png" alt="Fevadol Banner" class="banner-img">
+        </div>
+
+        <div class="video-container">
+            <video controls>
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="footer-desc-container">
+            <img src="footer .png" alt="Product Description" class="footer-img">
+        </div>
+
+        <div class="cta-container">
+            <img src="button.png" alt="اشتري الآن" class="buy-now-btn" onclick="toggleModal(true)">
+        </div>
+
+    </div>
+
+    <div id="buyModal" class="modal-overlay" onclick="handleOutsideClick(event)">
+        <div class="modal-box">
+            <span class="close-btn" onclick="toggleModal(false)">&times;</span>
+            <div class="buy-label-top">اشتري الآن</div>
+            
+            <div class="options-grid">
+                 <a href="#" class="store-option">
+                    <img src="noon logo.png" alt="Noon" class="store-logo">
+                </a>
+            
+                <a href="#" class="store-option">
+                    <img src="eldawaa logo.png" alt="Al-Dawaa" class="store-logo">
+                </a>
+               <a href="#" class="store-option">
+                    <img src="elnahdi logo.png" alt="Nahdi" class="store-logo">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal(show) {
+            const modal = document.getElementById('buyModal');
+            modal.style.display = show ? 'flex' : 'none';
+        }
+
+        function handleOutsideClick(e) {
+            if (e.target.id === 'buyModal') {
+                toggleModal(false);
+            }
+        }
+    </script>
+
+</body>
+</html>
